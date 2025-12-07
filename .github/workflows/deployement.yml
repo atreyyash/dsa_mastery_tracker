@@ -1,4 +1,4 @@
-name: dsa-mastery-tracker
+name: DSA-Mastery-Tracker
 
 on:
   push:
@@ -23,15 +23,15 @@ jobs:
       - name: Copy Backend to EC2
         run: |
           rsync -avz -e "ssh -o StrictHostKeyChecking=no" \
-          ./server/ ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USERNAME }}/app/server/
+          ./server/ ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USERNAME }}/dsa_mastery_tracker/server/
 
       - name: Install & Restart Backend App
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} \
-          "cd ~/app/server && npm install && pm2 restart server || pm2 start src/server.js --name server"
+          "cd /home/ubuntu/dsa_mastery_tracker/server && npm install && pm2 restart server || pm2 start src/app.js --name server"
 
   frontend-deploy:
-    name: Deploy Frontend to S3 & CloudFront
+    name: Deploy Frontend to S3
     runs-on: ubuntu-latest
     needs: backend-deploy
 
