@@ -105,7 +105,7 @@ const DashboardLayout = () => {
                     </Button>
                 </Header>
 
-                <Content style={{ padding: 24, background: "#f5f6fa" }}>
+                <Content style={{ padding: 24, background: "#f5f6fa", textAlign: 'center' }}>
                     <Outlet/>
                 </Content>
             </Layout>
